@@ -34,13 +34,22 @@ const changeArticleTitleById=(req , res)=>{
         if(err){
             console.log(err)
         }else{
-            res.json('sucess update new articles')
+            res.json('sucess update new item')
+        
         }
     })
 }
 
 const changeArticleAuthorById=(req , res)=>{
-
+const emp = [req.body.newAuthor , req.params.id]
+const sql = `UPDATE articles SET author=?  WHERE id =?`;
+mysql.query(sql , emp , (err , result , field)=>{
+    if(err){
+        console.log('ERR',err)
+    } else{
+        res.json('sucessfuly change author article')
+    }
+})
 
 }
 const deleteArticleById=(req , res)=>{
