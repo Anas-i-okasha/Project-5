@@ -65,7 +65,15 @@ const deleteArticleById=(req , res)=>{
 }
 
 const deleteArticleByAuthor=(req , res)=>{
-
+const author = [req.body.author]
+const sql = `DELETE FROM articles WHERE author =?`;
+mysql.query(sql , author , (err , result , field)=>{
+    if(err){
+        console.log('Err',err)
+    }else{
+        res.json('second delete done sucessfully')
+    }
+})
 
 }
 
