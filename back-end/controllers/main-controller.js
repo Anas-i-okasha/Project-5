@@ -1,17 +1,30 @@
-const articles = require('../dataB')
-const dataB = require('../dataB')
+const mysql = require('../db')
+
 
 
 const getAllArticles=(req , res)=>{
 console.log('All articles with me')
-res.json(articles)
+mysql.query(`SELECT * FROM articles` , (err , result , field)=>{
+    if(err){
+   console.log(err)
+    } else {
+        res.json(result)
+        console.log(result)
+    }
+} )
 }
 const createNewArticles=(req , res)=>{
-    console.log('Add new articles')
     console.log('REQ.BODY',req.body)
     const newArticle = req.body
-    articles.push(newArticle)
-    res.json(articles)
+    const sql = `INSERT INTO articles (title ,description ,  author ) VALUES (? , ? , ?)`;
+    mysql.query(sql , [newArticle.title , newArticle.description , newArticle.author] , (err , result , field)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.json('new Articles added succesfully')
+            console.log(result)
+        }
+    })
 }
 const changeArticleTitleById=(req , res)=>{
 console.log('PARAMS', req.method)
