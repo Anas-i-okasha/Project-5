@@ -53,6 +53,15 @@ mysql.query(sql , emp , (err , result , field)=>{
 
 }
 const deleteArticleById=(req , res)=>{
+    const dele = [req.params.id]
+    const sql = `DELETE FROM articles WHERE id =?`;
+    mysql.query(sql , dele , (err , result , field)=>{
+        if(err){
+            console.log('ERR', err)
+        }else{
+            res.json('first delete done sucesfully')
+        }
+    })
 }
 
 const deleteArticleByAuthor=(req , res)=>{
