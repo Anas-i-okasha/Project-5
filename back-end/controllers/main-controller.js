@@ -27,40 +27,31 @@ const createNewArticles=(req , res)=>{
     })
 }
 const changeArticleTitleById=(req , res)=>{
-console.log('PARAMS', req.method)
-
-for(let i=0; i<articles.length;i++){
-if(articles[i].id == req.params.id){
-articles[i].title=req.params.newTitle
-}
-}
-res.json(articles)
+   const info =[req.params.newTitle , req.params.id]
+    
+    const sql = `UPDATE articles SET title =? WHERE id = ?`;
+    mysql.query(sql, info, (err , result , field)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.json('sucess update new articles')
+        }
+    })
 }
 
 const changeArticleAuthorById=(req , res)=>{
-for (let i=0 ; i<articles.length ; i++){
-if(articles[i].id==req.params.id)
-articles[i].author=req.body.newAuthor
-}
-res.json(articles)
+
+
 }
 const deleteArticleById=(req , res)=>{
-for(let i=0; i<articles.length ; i++){
-if(articles[i].id == req.params.id)
-articles.shift(articles[i])
-}
-res.json(articles)
 }
 
 const deleteArticleByAuthor=(req , res)=>{
-for(let i=0; i<articles.length ; i++){
-    if(articles[i].author==req.body.author){
-        articles.shift(articles[i])
-    }
+
 
 }
-res.json(articles)
-}
+
+
 
 module.exports={
     getAllArticles,
