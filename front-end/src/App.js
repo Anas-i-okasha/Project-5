@@ -1,29 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 
-// Class component
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return (
-      <div>
-        <h1>HELLO WORLD</h1>
-      </div>
-    );
-  }
+const getAllArticles=()=>{
+ console.log('i want to get all articles')
 }
-
-/* 
-// functional component
 const App = () => {
   return (
     <div>
       <h1>HELLO WORLD</h1>
+
+      <div> <button onClick={getAllArticles}>Get all articles</button> </div>
     </div>
   );
 };
 export default App;
-*/
+
