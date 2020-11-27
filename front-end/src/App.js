@@ -1,61 +1,28 @@
 import React from 'react';
-import axios from 'axios'
-import {useState} from 'react'
-import './App.css';
+import { BrowserRouter as Router, Route , Link } from 'react-router-dom';
+import Tasks from './component/Tasks'
+import Login from './component/Login/Login'
+import Signup from './component/Login/Signup';
+import Navbar from './component/Navbar/Navbar'
+import About from './component/About/About'
+import Home from './component/Home/Home'
+import Contact from './component/Contact/Contact'
 
 
 const App = () => {
-  const [articles , setarticles] = useState([])
-  const [title , settitle] = useState("")
-  const [description , setdescription]=useState("")
-  const [author , setauthor] = useState("")
-
-  const getAllArticles=()=>{
-    axios.get('http://localhost:5000/articles')
-    .then((responce)=>{
-      console.log('Responce', responce)
-      setarticles(responce.data)
-    })
-    .catch((err)=>{
-      console.log('Err' , err)
-    })
-   }
-   
-   const addNewArticles=()=>{
-     axios.post('http://localhost:5000/articles' , {title:title , description:description , author:author})
-     .then((responce)=>{
-        console.log('ERR' , responce)
-     })
-     .catch((error)=>{
-      console.log('ERR' , error)
-     })
-   }
-
+ 
   return (
+    <Router>
     <div>
-      <h1>PROJECT - 4</h1>
-      <div className='btn'> <button onClick={getAllArticles}>Get all articles</button> 
-
-      {articles.map((elem)=>{
-       return  <div className='get'> <span> Title: {elem.title}</span>
-        <span>Description: {elem.description}</span> 
-        <span> Author: {elem.author} </span> </div>
-      })}
-
+      <Navbar/>
+      <Route path ='/tasks' exact component={Tasks}/>
+      <Route path='/' exact component={Login}/>
+      <Route path='/signup' exact component={Signup} />
+      <Route path='/about' exact component={About} />
+      <Route path='/home' exact component={Home}/>
+      <Route path='/contact' exact component={Contact}/>
       </div>
-      <div> <h1>Add new Articles</h1>
-      <div> <input type='text' placeholder='enter your title' onChange={(event)=>{
-        settitle(event.target.value) }} /></div>
-      <div> <input type='text' placeholder='enter your description'onChange={(event)=>
-      setdescription(event.target.value)} /> </div>
-      <div> <input type='text' placeholder='enter your author ' onChange={(event)=>{
-        setauthor(event.target.value)
-      }}/> </div>
-      <div>  <button onClick={addNewArticles}>Add new Articles</button> </div>
-      </div>
-
-      
-    </div>
+      </Router>
   );
 };
 export default App;

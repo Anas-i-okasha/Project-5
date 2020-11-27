@@ -1,7 +1,5 @@
 const mysql = require('../db')
 
-
-
 const getAllArticles=(req , res)=>{
 console.log('All articles with me')
 mysql.query(`SELECT * FROM articles` , (err , result , field)=>{
@@ -22,7 +20,7 @@ const createNewArticles=(req , res)=>{
             console.log(err)
         }else{
             res.json('new Articles added succesfully')
-            console.log(result)
+            console.log('New articles add succesfully')
         }
     })
 }
