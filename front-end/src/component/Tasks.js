@@ -3,8 +3,6 @@ import axios from 'axios'
 import {useState} from 'react'
 
 
-
-
 const Tasks = () => {
   const [articles , setarticles] = useState([])
   const [title , settitle] = useState("")

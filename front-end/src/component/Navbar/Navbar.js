@@ -1,46 +1,42 @@
   import React from 'react'
   import { BrowserRouter as Router, Route  , Link} from 'react-router-dom';
+  import './Navbar.css'
   
     const Navbar=()=> {
       
           return (
-              <div>
-                   <nav id="navbar-example2" class="navbar navbar-light bg-light">
-  <a class="navbar-brand" >Invest in YourSelf</a>
-  <ul class="nav nav-pills">
-    <li class="nav-item">
-      <Link to='/' class="nav-link" >Home</Link>
-    </li>
-    <li class="nav-item">
-      <Link to='/about' class="nav-link" >About</Link>
-    </li>
-    <li className='nav-item'>
-       <Link to='/contact' className='nav-link'>Contact Us </Link>
-    </li>
-    <li className='nav-item'>
-        <Link to='/login' className='nav-link'> Login </Link>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">Catigoury</a>
-     
-    </li>
-  </ul>
-</nav>
-       </div>
+              <div className='container-fluid'>
+            <nav className="navbar ">
+                  <h2 >Invest In YourSelf</h2>
+                  <ul className="nav">
+                    <li className="nav-item">
+                      <Link to='/' className='nav-link'>Home</Link>
+                    </li>
+                    <li class="nav-item" >
+                      <Link to='/about' className="nav-link" >About Us</Link>
+                    </li>
+                    <li class='nav-item'>
+                      <Link to='/contact' className='nav-link'> Contact Us </Link>
+                    </li>
+                    <div class="dropdown">
+                    <a  href="#" class="dropdown-toggle nav-link"  
+                      data-toggle="dropdown"> Categoureis </a>
+
+                         <div class="dropdown-menu" >
+                        <a  href='#' class="dropdown-item" >Action</a>
+                        <a href='#' class="dropdown-item" >Another action</a>
+                         <a href='#' class="dropdown-item">Something else here</a>
+                       </div>
+                       </div>
+              
+                
+      <Link to='/login' className='nav-link' ><span className=" glyphicon glyphicon-log-in"></span> Login</Link>
+      <Link to='/signup'className='nav-link' ><span className=" glyphicon glyphicon-user"></span> Sign Up </Link>
+                  </ul>
+                </nav>
+                </div>
           )
   }
   
   export default Navbar;
   
-
-{/* <div>
-                    <div> <h1> Project-5</h1> </div>
-                      <div> <ul>
-                           <Link to='/home' className="text-success">Home</Link>  
-                           <Link to='/about'>About Us </Link>  
-                           <Link to='/contact'>Contact Us</Link>
-                         <Link to='/'>Login</Link>
-
-                         
-                         </ul> </div>
-                  </div> */}

@@ -16,7 +16,7 @@ const App = () => {
     <Router>
     <div>
       <Navbar/>
-      <Route path ='/tasks' exact component={Tasks}/>
+      <Route path ='/admin' exact component={Tasks}/>
       <Route path='/login' exact component={Login}/>
       <Route path='/signup' exact component={Signup} />
       <Route path='/about' exact component={About} />
