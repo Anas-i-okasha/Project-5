@@ -5,7 +5,7 @@ import {useState} from 'react'
 
 
 
-const App = () => {
+const Tasks = () => {
   const [articles , setarticles] = useState([])
   const [title , settitle] = useState("")
   const [description , setdescription]=useState("")
@@ -69,5 +69,5 @@ const App = () => {
       
   );
 };
-export default App;
+export default Tasks;
 

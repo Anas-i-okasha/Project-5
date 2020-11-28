@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route , Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Tasks from './component/Tasks'
 import Login from './component/Login/Login'
 import Signup from './component/Login/Signup';
@@ -16,10 +17,10 @@ const App = () => {
     <div>
       <Navbar/>
       <Route path ='/tasks' exact component={Tasks}/>
-      <Route path='/' exact component={Login}/>
+      <Route path='/login' exact component={Login}/>
       <Route path='/signup' exact component={Signup} />
       <Route path='/about' exact component={About} />
-      <Route path='/home' exact component={Home}/>
+      <Route path='/' exact component={Home}/>
       <Route path='/contact' exact component={Contact}/>
       </div>
       </Router>
