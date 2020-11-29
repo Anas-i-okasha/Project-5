@@ -74,6 +74,32 @@ mysql.query(sql , author , (err , result , field)=>{
 })
 
 }
+const userSignUp=(user)=>{
+const {name , age , email , password}=user
+
+console.log(  'I will send you all users:', name + " " + age + " " + email + " " + password)
+mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , (error , result , field)=>{
+    if(error){
+        console.log('ERR' , error)
+    }
+    if(result.length>0){
+        return 'the email is already exist'
+    }
+    if(result.length === 0){
+     const sql=`INSERT INTO users (name , age , email , password) VALUES (? , ? , ? , ?)`;
+     mysql.query(sql , [user.name , user.age , user.email , user.password] , (err , result , field)=>{
+         if(err){
+             console.log(err)
+         } else{
+             return 'you create new account succsfully , thanks'
+         }
+     })
+    }
+})
+
+}
+
+
 
 
 
@@ -83,5 +109,6 @@ module.exports={
     changeArticleTitleById,
     changeArticleAuthorById,
     deleteArticleById,
-    deleteArticleByAuthor
+    deleteArticleByAuthor,
+    userSignUp
 }
