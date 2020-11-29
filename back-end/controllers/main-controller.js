@@ -1,4 +1,9 @@
 const mysql = require('../db')
+const bcrypt = require("bcrypt");
+
+
+
+
 
 const getAllArticles=(req , res)=>{
 console.log('All articles with me')
@@ -74,25 +79,32 @@ mysql.query(sql , author , (err , result , field)=>{
 })
 
 }
-const userSignUp=(user)=>{
+const userSignUp=  (user)=>{
 const {name , age , email , password}=user
 
-console.log(  'I will send you all users:', name + " " + age + " " + email + " " + password)
-mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , (error , result , field)=>{
+// check if the user exist in the database --------
+mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
     if(error){
         console.log('ERR' , error)
     }
     if(result.length>0){
+
         return 'the email is already exist'
     }
+    // create new user with hash password and save it in the database ---------
     if(result.length === 0){
+        const newUser = user;
+        newUser.password = await bcrypt.hash(user.password , parseInt(process.env.SALT) )
+
      const sql=`INSERT INTO users (name , age , email , password) VALUES (? , ? , ? , ?)`;
      mysql.query(sql , [user.name , user.age , user.email , user.password] , (err , result , field)=>{
          if(err){
              console.log(err)
          } else{
-             return 'you create new account succsfully , thanks'
+             console.log(result)
+             return 'you have create new account succsfully'
          }
+             
      })
     }
 })
