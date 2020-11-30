@@ -126,12 +126,22 @@ mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , res
         console.log('the user is not found in database')
     }else{
         if(await bcrypt.compare(password , result[0].password)){
-         console.log('login succesfully')
+            console.log('login succesfully')
+        const payload={
+         email:result[0].email , 
+         id: result[0].id
+        }
+        const option={
+            expiresIn:process.env.TOKEN_EXPIRATION
+        }
+        //  return jwt.sign(payload , process.env.SECRET , option)
+         
+          console.log('jwt:::', jwt.sign(payload , process.env.SECRET , option))
+        
         }else{
             console.log('invalid username and password')
         }
     }
-    
 })
 }
 module.exports={
