@@ -1,5 +1,6 @@
 const mysql = require('../db')
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
 
 
 
@@ -77,8 +78,9 @@ mysql.query(sql , author , (err , result , field)=>{
         res.json('second delete done sucessfully')
     }
 })
-
 }
+
+// Sign up route to make the user create account --
 const userSignUp=  (user)=>{
 const {name , age , email , password}=user
 
@@ -88,8 +90,8 @@ mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , res
         console.log('ERR' , error)
     }
     if(result.length>0){
-
-        return 'the email is already exist'
+        console.log( 'the email is already exist')
+        return " this email is already exist "
     }
     // create new user with hash password and save it in the database ---------
     if(result.length === 0){
@@ -101,20 +103,37 @@ mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , res
          if(err){
              console.log(err)
          } else{
-             console.log(result)
-             return 'you have create new account succsfully'
-         }
+             console.log("thank you for create new account ")
              
+         }  
      })
+     return ( 'you have create new account succsfully')
     }
 })
-
 }
 
-
-
-
-
+const userLogin =(user)=>{
+const {email , password}=user
+if(!email || !password){
+    console.log('Enter your email and password')
+    return 'Enter your email and password'
+}
+mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
+    if(error){
+        console.log('Err', error)
+    }
+    if(result.length===0){
+        console.log('the user is not found in database')
+    }else{
+        if(await bcrypt.compare(password , result[0].password)){
+         console.log('login succesfully')
+        }else{
+            console.log('invalid username and password')
+        }
+    }
+    
+})
+}
 module.exports={
     getAllArticles,
     createNewArticles,
@@ -122,5 +141,6 @@ module.exports={
     changeArticleAuthorById,
     deleteArticleById,
     deleteArticleByAuthor,
-    userSignUp
+    userSignUp,
+    userLogin
 }

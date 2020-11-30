@@ -1,7 +1,7 @@
 const express = require('express');
 const mainRouter = express.Router();
 const {getAllArticles , createNewArticles , changeArticleTitleById , 
-    changeArticleAuthorById ,deleteArticleById , deleteArticleByAuthor , userSignUp }= require('../controllers/main-controller')
+    changeArticleAuthorById ,deleteArticleById , deleteArticleByAuthor , userSignUp, userLogin}= require('../controllers/main-controller')
 
 mainRouter.get('/articles' , getAllArticles)
 mainRouter.post('/articles' , createNewArticles)
@@ -21,8 +21,10 @@ mainRouter.post('/signup' , async(req , res)=>{
 mainRouter.post('/login', async(req , res)=>{
     try{
         res.json(await userLogin(req.body))
+
     } catch (err){
         throw err
     }
 })
+
 module.exports = mainRouter;
