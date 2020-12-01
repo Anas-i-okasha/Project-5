@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    padding: 10% 3% 1% 1%;
+    max-width: 445px;
+
+}
+.group{
+    display: flex;
+    flex-direction: column;
+}
+#login{
+    display: flex;
+    justify-content: end;
+    text-align: end;
+    margin-left: 150px;
+}
+.text{
+    text-align: center;
+    font-size: large;
+}

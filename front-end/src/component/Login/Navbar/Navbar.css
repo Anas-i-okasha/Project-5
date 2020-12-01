@@ -1,0 +1,16 @@
+.container-fluid{
+padding: 5px 15px ;
+}
+.nav{
+    border: #353535 solid 3px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border-radius: 3px;
+}
+.navbar{
+    background-color: rgb(26, 32, 53);
+    padding: 10px 10px 10px 10px ;
+    color: white;
+    border-radius: 5px;
+    
+}

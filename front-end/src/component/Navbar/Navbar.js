@@ -10,7 +10,7 @@
                   <h2 >Invest In YourSelf</h2>
                   <ul className="nav">
                     <li className="nav-item">
-                      <Link to='/' className='nav-link'>Home</Link>
+                      <Link to='/home' className='nav-link'>Home</Link>
                     </li>
                     <li class="nav-item" >
                       <Link to='/about' className="nav-link" >About Us</Link>
@@ -30,8 +30,8 @@
                        </div>
               
                 
-      <Link to='/login' className='nav-link' ><span className=" glyphicon glyphicon-log-in"></span> Login</Link>
-      <Link to='/signup'className='nav-link' ><span className=" glyphicon glyphicon-user"></span> Sign Up </Link>
+      <Link to='/' className='nav-link' ><span className=" glyphicon glyphicon-log-in"></span> Sign Out </Link>
+      
                   </ul>
                 </nav>
                 </div>

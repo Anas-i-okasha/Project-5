@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import {useState} from 'react'
+import Navbar from './Navbar/Navbar'
 
 
 const Tasks = () => {
@@ -42,6 +43,7 @@ const Tasks = () => {
 
   return (
     <div>
+      <Navbar/>
       <h1>PROJECT - 4</h1>
       <div className='btn'> <button onClick={getAllArticles}>Get all articles</button> 
 

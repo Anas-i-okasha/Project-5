@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 import axios from 'axios'
+import Navbar from '../Navbar/Navbar'
 
 const Home=()=> {
     const [articles , setarticles] = useState([])
@@ -16,6 +17,7 @@ const Home=()=> {
        }
         return (
             <div>
+              <Navbar/>
                 <p> welcome in my Home </p>
 
                 <div> <button onClick={getAllArticles}> Get All articles</button> </div>

@@ -2,7 +2,7 @@ const express = require('express');
 const mainRouter = express.Router();
 const {getAllArticles , createNewArticles , changeArticleTitleById , 
     changeArticleAuthorById ,deleteArticleById , deleteArticleByAuthor , userSignUp, userLogin}= require('../controllers/main-controller')
-// const middleware = require('../middlewares/middlewares')
+const middleware = require('../middlewares/middlewares')
 mainRouter.get('/articles' , getAllArticles)
 mainRouter.post('/articles' , createNewArticles)
 mainRouter.put('/articles/:id/:newTitle' , changeArticleTitleById)
@@ -27,8 +27,8 @@ mainRouter.post('/login', async(req , res)=>{
     }
 })
 
-// mainRouter.get('/save' , middleware , (req , res)=>{
-//     res.json('invest in yourself ')
-// })
+mainRouter.get('/save' , middleware , (req , res)=>{
+    res.json('invest in yourself ')
+})
 
 module.exports = mainRouter;
