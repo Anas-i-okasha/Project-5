@@ -4,6 +4,22 @@
     gap:10px;
     padding: 10% 3% 1% 1%;
     max-width: 445px;
+    border: #353535 solid 3px;
+    border-radius: 8px;
+    background-color: #353535;
+    margin-top: 35px;
+    max-height: 450px;
+    margin-top: 25px;
+
+}
+.type{
+    text-align: center;
+    margin: 20px;
+}
+.header{
+    text-align: center;
+    color: white;
+    margin-bottom: 15px;
 
 }
 .group{

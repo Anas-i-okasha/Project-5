@@ -1,6 +1,7 @@
 const mysql = require('../db')
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { response } = require('express');
 
 
 
@@ -84,8 +85,9 @@ mysql.query(sql , author , (err , result , field)=>{
 const userSignUp=  (user)=>{
 const {name , age , email , password}=user
 
-// check if the user exist in the database --------
-mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
+if(!name || !age || !email || !password){
+    console.log('please enter your valid information ')
+}else{mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
     if(error){
         console.log('ERR' , error)
     }
@@ -110,7 +112,10 @@ mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , res
      return ( 'you have create new account succsfully')
     }
 })
-}
+}}
+// check if the user exist in the database --------
+
+
 
 const userLogin =(user)=>{
 const {email , password}=user
@@ -127,16 +132,13 @@ mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , res
     }else{
         if(await bcrypt.compare(password , result[0].password)){
             console.log('login succesfully')
-        const payload={
-         email:result[0].email , 
-         id: result[0].id
-        }
         const option={
             expiresIn:process.env.TOKEN_EXPIRATION
         }
         //  return jwt.sign(payload , process.env.SECRET , option)
          
-          console.log('jwt:::', jwt.sign(payload , process.env.SECRET , option))
+         const token=  jwt.sign( {id:result[0].id}, process.env.SECRET , option)
+          console.log( "TOKEN:", token)
         
         }else{
             console.log('invalid username and password')
