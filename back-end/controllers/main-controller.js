@@ -122,8 +122,7 @@ const {email , password}=user
 if(!email || !password){
     console.log('Enter your email and password')
     return 'Enter your email and password'
-}
-mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
+}  else{mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
     if(error){
         console.log('Err', error)
     }
@@ -146,6 +145,11 @@ mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , res
     }
 })
 }
+
+}
+
+
+
 module.exports={
     getAllArticles,
     createNewArticles,

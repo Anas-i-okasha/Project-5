@@ -1,16 +1,22 @@
 import React from 'react'
 import {useState} from 'react'
+import Axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css'
 import Navbar from './Navbar/Navbar'
 import { BrowserRouter as Router, Route , Link } from 'react-router-dom';
    
 const Login=()=>{
-    const [email , setemail]=useState("")
-    const [Password , setpassword]=useState("")
+    const [email , setEmail]=useState("")
+    const [password , setPassword]=useState("")
 
     const login=()=>{
-        console.log('login succssfully')
+        Axios.post('http://localhost:5000/login' , {email:email , password:password}).then((responce)=>{
+          console.log(responce)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     }
         return (
             <div>
@@ -23,7 +29,7 @@ const Login=()=>{
                 <span class="input-group-text" id="basic-addon1">@</span>
                 </div>
                 <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" onChange={(event)=>{
-                    setemail(event.target.value)
+                    setEmail(event.target.value)
                 }}></input>
             </div>
             <div>
@@ -31,8 +37,8 @@ const Login=()=>{
                 <div className='input-group-prepend'>
                 <span class="input-group-text" id="basic-addon1">#</span>
                 </div>
-                <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" onClick={(event)=>{
-                    setpassword(event.target.value)
+                <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" onChange={(event)=>{
+                    setPassword(event.target.value)
                 }}></input>
             </div>
         </div>
