@@ -4,20 +4,17 @@ import Axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css'
 import Navbar from './Navbar/Navbar'
-import { BrowserRouter as Router, Route , Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route , Link, Redirect , useHistory } from 'react-router-dom';
+
    
 const Login=()=>{
+    const history = useHistory()
     const [email , setEmail]=useState("")
     const [password , setPassword]=useState("")
 
     const login=()=>{
-        Axios.post('http://localhost:5000/login' , {email:email , password:password}).then((responce)=>{
-          console.log(responce)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
     }
+         
         return (
             <div>
                 <Navbar/>

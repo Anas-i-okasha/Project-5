@@ -1,9 +1,6 @@
 const mysql = require('../db')
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
-const { response } = require('express');
-
-
 
 
 
@@ -82,73 +79,70 @@ mysql.query(sql , author , (err , result , field)=>{
 }
 
 // Sign up route to make the user create account --
-const userSignUp=  (user)=>{
-const {name , age , email , password}=user
-
-if(!name || !age || !email || !password){
-    console.log('please enter your valid information ')
-}else{mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
+const userSignUp=  (req , res)=>{
+const {name , age , email , password}=req.body
+mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
     if(error){
         console.log('ERR' , error)
     }
+// To check if the user exist in our database or not
     if(result.length>0){
-        console.log( 'the email is already exist')
-        return " this email is already exist "
-    }
-    // create new user with hash password and save it in the database ---------
-    if(result.length === 0){
-        const newUser = user;
-        newUser.password = await bcrypt.hash(user.password , parseInt(process.env.SALT) )
-
-     const sql=`INSERT INTO users (name , age , email , password) VALUES (? , ? , ? , ?)`;
-     mysql.query(sql , [user.name , user.age , user.email , user.password] , (err , result , field)=>{
+        res.json(" this email is already exist ") 
+    } else {(result.length === 0)
+        const newUser = req.body;
+        newUser.password = await bcrypt.hash(password , parseInt(process.env.SALT) )
+// if the user does't exist in our database will create new account to make him reach our dashboard 
+    //  const sql=`INSERT INTO users (name , age , email , password) VALUES (? , ? , ? , ?)`;
+     mysql.query( `INSERT INTO users SET ? `,{name:name , age:age , email:email , password:newUser.password} , (err , results , field)=>{
          if(err){
              console.log(err)
          } else{
-             console.log("thank you for create new account ")
-             
+             res.json('Thank you for create your account') 
          }  
      })
-     return ( 'you have create new account succsfully')
     }
 })
-}}
-// check if the user exist in the database --------
+}
 
+const userLogin = async (req , res)=>{
+    try{
+        const {email , password}=req.body
 
+        mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
+            if(error){
+                console.log('Err', error)
+            }
+            if(result.length===0){
+                res.status(404).json({massege:'the user is not found in database'})
+            }else{
+                if(await bcrypt.compare(password , result[0].password)){
+                    
+                const option={
+                    expiresIn:process.env.TOKEN_EXPIRATION
+                }
+                //  return jwt.sign(payload , process.env.SECRET , option)
+                 
+                 const token=await jwt.sign( {id:result[0].id}, process.env.SECRET , option)
+                 res.status(200).json({massege:'Login sucessfully' , token:token}) 
+                  
+                
+                }else{
+                    console.log('invalid username and password')
+                    res.status(404).json({massege:'invalid username or password'})
+                }
+            }
+        })
 
-const userLogin =(user)=>{
-const {email , password}=user
-if(!email || !password){
-    console.log('Enter your email and password')
-    return 'Enter your email and password'
-}  else{mysql.query(`SELECT * FROM users WHERE email = ?` , [email] , async (error , result , field)=>{
-    if(error){
-        console.log('Err', error)
+    } catch (err){
+         console.log('ERR',err)
     }
-    if(result.length===0){
-        console.log('the user is not found in database')
-    }else{
-        if(await bcrypt.compare(password , result[0].password)){
-            console.log('login succesfully')
-        const option={
-            expiresIn:process.env.TOKEN_EXPIRATION
-        }
-        //  return jwt.sign(payload , process.env.SECRET , option)
+}
+    
+    
+    
+    
          
-         const token=  jwt.sign( {id:result[0].id}, process.env.SECRET , option)
-          console.log( "TOKEN:", token)
-        
-        }else{
-            console.log('invalid username and password')
-        }
-    }
-})
-}
-
-}
-
-
+    
 
 module.exports={
     getAllArticles,

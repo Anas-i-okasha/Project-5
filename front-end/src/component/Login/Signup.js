@@ -2,28 +2,29 @@ import React from 'react'
 import {useState} from 'react'
 import Axios from 'axios'
 import Navbar from './Navbar/Navbar'
-import { BrowserRouter as Router, Route , Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route , Link , useHistory} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './signup.css'
  const Signup=()=>{
+     const history = useHistory(false)
    const [name , setName] = useState("")
    const [age , setAge] = useState(0)
    const [email , setEmail] = useState("")
    const [password , setPassword]=useState("")
 
    const addUser=()=>{
-       Axios.post('http://localhost:5000/signup' , {name:name , age:age , email:email ,password:password})
-       .then((responce)=>{
-           console.log(responce)
-        
+       Axios.post('http://localhost:5000/signup' , {name:name , age:age , email:email , password:password}).then((responce)=>{
+        console.log(responce.data)
+        if(responce.data ===true){
+            history.push('/home')
+        }
        })
        .catch((err)=>{
-           console.log(err)
+
        })
-   }
-   
       
-    
+   
+   }
         return (
             <div>
                 <Navbar/>

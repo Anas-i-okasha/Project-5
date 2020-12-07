@@ -1,14 +1,21 @@
 import React from 'react';
 import axios from 'axios'
 import {useState} from 'react'
+import { BrowserRouter as Router, Route , Link , useParams } from 'react-router-dom';
 import Navbar from './Navbar/Navbar'
 
 
 const Tasks = () => {
+  
+  // const params = useParams
   const [articles , setarticles] = useState([])
   const [title , settitle] = useState("")
   const [description , setdescription]=useState("")
   const [author , setauthor] = useState("")
+  const [newAuthor , setNewAuthor]=useState("")
+  const[id , setid]=useState("")
+
+  
   
 
   const getAllArticles=()=>{
@@ -32,14 +39,14 @@ const Tasks = () => {
      })
    }
 
-//    const changeArticleTitleById=()=>{
-//      axios.put('/articles/:id/:newTitle', {title:newTitle , id:id}).then((responce)=>{
+   const changeArticleAthourById=()=>{
+     axios.put('/articles/:id', {newAuthor:newAuthor , id:id}).then((responce)=>{
 
-//      })
-//      .catch((error)=>{
-//        console.log(error)
-//      })
-//    }
+     })
+     .catch((error)=>{
+       console.log(error)
+     })
+   }
 
   return (
     <div>
@@ -63,6 +70,15 @@ const Tasks = () => {
         setauthor(event.target.value)
       }}/> </div>
       <div>  <button onClick={addNewArticles}>Add new Articles</button> </div>
+      </div>
+      <div>
+        <input type='text' placeholder='enter new author' onChange={(event)=>{
+          setNewAuthor(event.target.value)
+        }}/>
+        <input type='text' onChange={(event)=>{
+          setid(event.target.value)
+        }}/>
+        <button onClick={changeArticleAthourById}>change author</button>
       </div>
       </div>
 
