@@ -6,22 +6,32 @@ import { BrowserRouter as Router, Route , Link , useHistory} from 'react-router-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './signup.css'
  const Signup=()=>{
-     const history = useHistory(false)
+     const history = useHistory()
    const [name , setName] = useState("")
    const [age , setAge] = useState(0)
    const [email , setEmail] = useState("")
    const [password , setPassword]=useState("")
 
    const addUser=()=>{
-       Axios.post('http://localhost:5000/signup' , {name:name , age:age , email:email , password:password}).then((responce)=>{
-        console.log(responce.data)
-        if(responce.data ===true){
-            history.push('/home')
-        }
-       })
-       .catch((err)=>{
+       if(!name || !age || !email || !password){
+         console.log('Enter valid information')
+         return 
+       }
+       Axios.post('http://localhost:5000/signup' , {name:name , age:age , email:email , password:password})
+       .then((responce)=>{
+        if(responce.data == 'Thank you for create your account'){   
+            history.push('/')
+            }else{
+                console.log('Plz enter valid information')
+            }
+            
+    
 
        })
+       .catch((err)=>{
+        console.log(err)
+       })
+    
       
    
    }

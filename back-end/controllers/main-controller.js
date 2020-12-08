@@ -113,7 +113,7 @@ const userLogin = async (req , res)=>{
                 console.log('Err', error)
             }
             if(result.length===0){
-                res.status(404).json({massege:'the user is not found in database'})
+                res.status(404).json({massege:'the user is not found '})
             }else{
                 if(await bcrypt.compare(password , result[0].password)){
                     

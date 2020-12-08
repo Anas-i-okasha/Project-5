@@ -13,6 +13,25 @@ const Login=()=>{
     const [password , setPassword]=useState("")
 
     const login=()=>{
+        if(email.length<3 || password.length<3){
+            console.log('Enter your email and password') 
+
+        }
+        Axios.post('http://localhost:5000/login', {email:email , password}).then((data)=>{
+          if(data.data){
+              history.push('/home')
+          }
+           if(email =='anasokasha9951' && password==123789){
+             
+             history.push('/admin')
+          }else{
+              console.log('Enter valid information')
+          }
+        })
+        .catch((err)=>{
+            console.log(err)
+
+        })
     }
          
         return (

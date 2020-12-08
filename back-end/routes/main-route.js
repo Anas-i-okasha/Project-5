@@ -10,13 +10,6 @@ mainRouter.put('/articles/:id' , changeArticleAuthorById)
 mainRouter.delete('/articles/:id', deleteArticleById)
 mainRouter.delete('/articles', deleteArticleByAuthor)
 
-// mainRouter.post('/signup' , async(req , res)=>{
-//     try{
-//         res.json(await userSignUp(req.body))
-//     } catch(err){
-//         throw err
-//     }
-// })
 
 mainRouter.post('/signup',  userSignUp)
 
