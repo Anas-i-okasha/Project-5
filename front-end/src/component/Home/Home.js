@@ -1,10 +1,21 @@
 import React from 'react'
-import {useState} from 'react'
+import {useState , useEffect} from 'react'
 import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
+import ArticleItem from '../articleItem'
+import AddNewItem from '../AddNewItem'
+import './Home.css'
+
+
 
 const Home=()=> {
     const [articles , setarticles] = useState([])
+    const [search , setSearch]=useState("")
+     useEffect(()=>{
+       getAllArticles()
+     } ,[])
+     
+     
     const getAllArticles=()=>{
         axios.get('http://localhost:5000/articles')
         .then((responce)=>{
@@ -15,19 +26,24 @@ const Home=()=> {
           console.log('Err' , err)
         })
        }
+    
+       const filterSer = articles.filter((item)=>{
+         return item.title.toLowerCase().includes(search.toLowerCase()) || item.description.toLowerCase().includes(search.toLocaleLowerCase()) || item.author.toLowerCase().includes(search.toLocaleLowerCase())
+
+       })
         return (
             <div>
               <Navbar/>
-                <p> welcome in my Home </p>
-
-                <div> <button onClick={getAllArticles}> Get All articles</button> </div>
-
-                <div> 
-                    <div> {articles.map((elem)=>{
-                         return  <div className='get'> <span> Title: {elem.title}</span>
-                         <span>Description: {elem.description}</span> 
-                         <span> Author: {elem.author} </span> </div>
-                    })} </div>
+              <div className='home'>  <input type='text' placeholder='search...' className='search' onChange={(e)=>{
+                    setSearch(e.target.value)
+                  }}/> 
+        <div>{filterSer.map((article , i)=><ArticleItem oneArticle={article} getAll={getAllArticles}  key={i}/>)}</div>
+                
+                <div><AddNewItem getAll={getAllArticles}/></div>
+              
+                <div>
+                </div>
+                
                 </div>
             </div>
         )

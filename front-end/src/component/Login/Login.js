@@ -2,6 +2,7 @@ import React from 'react'
 import {useState} from 'react'
 import Axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import swal from 'sweetalert';
 import './Login.css'
 import Navbar from './Navbar/Navbar'
 import { BrowserRouter as Router, Route , Link, Redirect , useHistory } from 'react-router-dom';
@@ -14,14 +15,30 @@ const Login=()=>{
 
     const login=()=>{
         if(email.length<3 || password.length<3){
-            console.log('Enter your email and password') 
-
+        swal({
+            icon:'error',
+            title:'oops',
+            text:'Enter your Email and password',
+        })
+        
         }
         Axios.post('http://localhost:5000/login', {email:email , password}).then((data)=>{
           if(data.data){
+              swal({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Login Successfully',
+                timer: 1500
+              })
               history.push('/home')
           }
-           if(email =='anasokasha9951' && password==123789){
+           if(email =='anasokasha9951' && password==12345){
+            swal({
+                icon:'success',
+                title: 'Welcome admin ',
+                text: 'Enjoy in your time ',
+                timer:2000
+              })
              
              history.push('/admin')
           }else{
@@ -33,6 +50,7 @@ const Login=()=>{
 
         })
     }
+
          
         return (
             <div>
@@ -59,7 +77,8 @@ const Login=()=>{
             </div>
         </div>
         <div>
-        <button type="button" class="btn btn-secondary btn-lg" id='login' onClick={login}>Login</button>
+        <button type="button" class="btn btn-secondary btn-lg" id='login' onClick={()=>login() }>Login</button>
+    
         </div>
         <Link to='/signup' className='type'> you don't have account yet ? </Link>
      </div>

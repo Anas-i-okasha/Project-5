@@ -1,0 +1,13 @@
+.home{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+      
+}
+.search{
+    display: flex;
+    justify-content: center;
+    max-width: 250px;
+    max-height: 185px;
+    align-items: center;
+}

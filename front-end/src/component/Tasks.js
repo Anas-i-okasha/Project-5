@@ -13,7 +13,7 @@ const Tasks = () => {
   const [description , setdescription]=useState("")
   const [author , setauthor] = useState("")
   const [newAuthor , setNewAuthor]=useState("")
-  const[id , setid]=useState("")
+  // const[id , setid]=useState("")
 
   
   
@@ -39,14 +39,14 @@ const Tasks = () => {
      })
    }
 
-   const changeArticleAthourById=()=>{
-     axios.put('/articles/:id', {newAuthor:newAuthor , id:id}).then((responce)=>{
+  //  const changeArticleAthourById=()=>{
+  //    axios.put('/articles/:id', {newAuthor:newAuthor , id:id}).then((responce)=>{
 
-     })
-     .catch((error)=>{
-       console.log(error)
-     })
-   }
+  //    })
+  //    .catch((error)=>{
+  //      console.log(error)
+  //    })
+  //  }
 
   return (
     <div>
@@ -76,9 +76,9 @@ const Tasks = () => {
           setNewAuthor(event.target.value)
         }}/>
         <input type='text' onChange={(event)=>{
-          setid(event.target.value)
+          // setid(event.target.value)
         }}/>
-        <button onClick={changeArticleAthourById}>change author</button>
+        {/* <button onClick={changeArticleAthourById}>change author</button> */}
       </div>
       </div>
 
