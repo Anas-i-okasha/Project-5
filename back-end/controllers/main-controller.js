@@ -1,6 +1,8 @@
 const mysql = require('../db')
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
+const { default: Axios } = require('axios');
+const { response } = require('express');
 
 
 
@@ -136,6 +138,22 @@ const userLogin = async (req , res)=>{
     } catch (err){
          console.log('ERR',err)
     }
+
+    
+}
+
+
+const getWeather= (req, res)=>{
+    const apiUrl="https://api.openweathermap.org/data/2.5/weather?q=Amman&appid=50bea3f3f1a46b405c2c2cc4b7de22fc&units=metric"
+        Axios.get(apiUrl)
+    .then((responce)=>{
+          res.json(responce.data)
+    })
+    .catch((err)=>{
+
+        console.log(err)
+
+    })
 }
     
     
@@ -152,5 +170,6 @@ module.exports={
     deleteArticleById,
     deleteArticleByAuthor,
     userSignUp,
-    userLogin
+    userLogin,
+    getWeather
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState , useEffect} from 'react'
 import Navbar from '../Navbar/Navbar'
 
 const About =()=> {
@@ -7,8 +7,6 @@ const About =()=> {
             <div>
                 <Navbar/>
                 <p> welcome in my about</p>
-
-            
             </div>
         )
     
