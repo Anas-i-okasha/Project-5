@@ -29,3 +29,10 @@ create table users (
 
     PRIMARY KEY (id)
 );
+
+
+create table favorit (
+    id INT AUTO_INCREMENT NOT null,
+    favorit varchar(255),
+    for
+)

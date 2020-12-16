@@ -1,0 +1,6 @@
+.card{
+    max-width: 21rem;
+    max-height:fit-content;
+    margin: 5px;
+    border-radius: 5px;
+}

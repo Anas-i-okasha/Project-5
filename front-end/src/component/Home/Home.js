@@ -14,11 +14,12 @@ const Home=()=> {
     const [Data , setData]=useState({})
     const [wind , setWind]=useState({})
     const [city , setcity]=useState({})
+    const [des , setDes] = useState({})
   
     const getWeatherData =  () => {
         Axios.get('http://localhost:5000/weather').then((responce)=>{
-      
-            setData(responce.data.main) ;setWind(responce.data.wind) ;setcity(responce.data) 
+
+            setData(responce.data.main) ;setWind(responce.data.wind) ;setcity(responce.data) ;setDes(responce.data.weather[1])
             
         })
         .catch((err)=>{
@@ -50,13 +51,15 @@ const Home=()=> {
         return (
             <div>
               <Navbar/>
-              <h1>  {Data.feels_like} min temp feel {"||"} {Data.temp} C {"||"} {wind.speed} Km/h  {"||"} {city.name}</h1>
+              <h1>  {Data.feels_like} min temp feel {"||"} Temp :{Data.temp}C {"||"} Wind speed:{wind.speed} Km/h  {"||"} {city.name} {"||"} </h1>
               <div className='home'>  <input type='text' placeholder='search...' className='search' onChange={(e)=>{
                     setSearch(e.target.value)
                   }}/> 
+                  <div><AddNewItem getAll={getAllArticles}/></div>
+                  
         <div>{filterSer.map((article , i)=><ArticleItem oneArticle={article} getAll={getAllArticles}  key={i}/>)}</div>
                 
-                <div><AddNewItem getAll={getAllArticles}/></div>
+                
               
                 <div>
                 </div>

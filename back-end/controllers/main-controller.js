@@ -155,6 +155,16 @@ const getWeather= (req, res)=>{
 
     })
 }
+
+const getSportsNews=(req , res)=>{
+   const sportApi="http://newsapi.org/v2/top-headlines?country=gb&category=sports&apiKey=95c0c5d06e5c4620aa609ac44b7b68d8"
+   Axios.get(sportApi).then((response)=>{
+       res.json(response.data)
+   })
+   .catch((err)=>{
+       console.log(err)
+   })
+}
     
     
     
@@ -171,5 +181,6 @@ module.exports={
     deleteArticleByAuthor,
     userSignUp,
     userLogin,
-    getWeather
+    getWeather,
+    getSportsNews
 }

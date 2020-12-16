@@ -1,7 +1,7 @@
 const express = require('express');
 const mainRouter = express.Router();
 const {getAllArticles , createNewArticles , changeArticleTitleById , 
-    changeArticleAuthorById ,deleteArticleById , deleteArticleByAuthor , userSignUp, userLogin , getWeather}= require('../controllers/main-controller')
+    changeArticleAuthorById ,deleteArticleById , deleteArticleByAuthor , userSignUp, userLogin , getWeather , getSportsNews}= require('../controllers/main-controller')
 const middleware = require('../middlewares/middlewares')
 mainRouter.get('/articles' , getAllArticles)
 mainRouter.post('/articles' , createNewArticles)
@@ -21,5 +21,6 @@ mainRouter.get('/save' , middleware , (req , res)=>{
 })
 
 mainRouter.get('/weather',getWeather)
+mainRouter.get('/sports',getSportsNews)
 
 module.exports = mainRouter;
